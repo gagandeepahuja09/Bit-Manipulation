@@ -9,20 +9,17 @@ Could you implement it without using extra memory?*/
 int Solution::singleNumber(const vector<int> &A) {
     vector<int> v(32, 0);
     for(int i = 0; i < A.size(); i++) {
-        int num = A[i];
-        for(int j = 31; j >= 0; j--) {
-            v[j] += (num & 1);
-            num >>= 1;
-            if(!num)
-                break;
+        for(int j = 0; j < 32; j++) {
+            if(A[i] & (1 << j))
+                v[j]++;
         }
     }
     int ans = 0;
-    for(int i = 31; i >= 0; i--) {
-        int x = v[i] % 3;
-        if(x == 1)
-            ans += (1 << (31 - i));
+    for(int i = 0; i < 32; i++) {
+        if(v[i] % 3 == 1)
+            ans += (1 << i);
     }
     return ans;
 }
+
 
