@@ -1,9 +1,9 @@
 int Solution::findMinXor(vector<int> &A) {
+    int ret = INT_MAX;
     sort(A.begin(), A.end());
-    int mn = INT_MAX;
-    for(int i = 0; i < A.size() - 1; i++) {
-        mn = min(mn, A[i] ^ A[i + 1]);
+    for(int i = 1; i < A.size(); i++) {
+        ret = min(ret, A[i] ^ A[i - 1]);
     }
-    return mn;
+    return ret;
 }
 
